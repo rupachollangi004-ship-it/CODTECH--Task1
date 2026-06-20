@@ -1,0 +1,49 @@
+import streamlit as st
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Dashboard Title
+st.title("Sales Trend Visualization Dashboard")
+
+# Sample Sales Data
+data = {
+    "Month": ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+              "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "Sales": [12000, 15000, 18000, 17000, 21000, 25000,
+              24000, 28000, 30000, 32000, 35000, 40000]
+}
+
+df = pd.DataFrame(data)
+
+# Show Dataset
+st.subheader("Sales Data")
+st.dataframe(df)
+
+# Line Chart
+st.subheader("Monthly Sales Trend")
+
+fig, ax = plt.subplots(figsize=(8, 4))
+ax.plot(df["Month"], df["Sales"], marker="o")
+ax.set_title("Sales Trend")
+ax.set_xlabel("Month")
+ax.set_ylabel("Sales Amount")
+
+st.pyplot(fig)
+
+# Summary Statistics
+st.subheader("Sales Summary")
+st.write("Total Sales:", df["Sales"].sum())
+st.write("Average Sales:", round(df["Sales"].mean(), 2))
+st.write("Highest Sales:", df["Sales"].max())
+st.write("Lowest Sales:", df["Sales"].min())
+
+# Bar Chart
+st.subheader("Sales Comparison")
+
+fig2, ax2 = plt.subplots(figsize=(8, 4))
+ax2.bar(df["Month"], df["Sales"])
+ax2.set_title("Monthly Sales Comparison")
+ax2.set_xlabel("Month")
+ax2.set_ylabel("Sales Amount")
+
+st.pyplot(fig2)
